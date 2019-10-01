@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
-@EqualsAndHashCode(exclude = "users")// On met ceci pour la serialisation dans les deux sens
+@EqualsAndHashCode(exclude = {"users","comptes"})// On met ceci pour la serialisation dans les deux sens
 @Table(name = "partenaire",uniqueConstraints = {
         @UniqueConstraint(columnNames = {
                 "ninea"

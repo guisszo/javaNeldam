@@ -2,11 +2,13 @@ package sn.neldamoney.neldam.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,7 +28,7 @@ public class User{
 
     @NotBlank
     @Size(min=3, max = 50)
-    private String name;
+    private String nomcomplet;
 
     @NotBlank
     @Size(min=3, max = 50)
@@ -42,6 +44,30 @@ public class User{
     @Size(min=6, max = 100)
     private String password;
 
+    @NotBlank
+    @Size(min = 9, max = 16)
+    private String tel;
+
+    @NotBlank
+    @Size(min = 5, max = 50)
+    private String adresse;
+
+    @Size(min = 2, max = 100)
+    private String image_name;
+
+    @NotBlank
+    @Size(min = 6, max = 15)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date created_at;
+
+    @NotBlank
+    @Size(min = 6, max = 15)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date updated_at;
+
+    @NotBlank
+    @Size(min = 5, max = 6)
+    private String statut;
 
     @JoinColumn(name = "partenaire_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -53,6 +79,8 @@ public class User{
     @JsonIgnoreProperties("users")
     private Compte compte;
 
+
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -61,11 +89,14 @@ public class User{
 
     public User() {}
 
-    public User(String name, String username, String email, String password) {
-        this.name = name;
+    public User(String nomcomplet, String username, String email, String password, String tel, String statut, String image_name) {
+        this.nomcomplet = nomcomplet;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.tel = tel;
+        this.statut = statut;
+        this.image_name = image_name;
     }
 
     public Long getId() {
@@ -84,14 +115,13 @@ public class User{
         this.username = username;
     }
 
-    public String getName() {
-        return name;
+    public String getNomcomplet() {
+        return nomcomplet;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNomcomplet(String nomcomplet) {
+        this.nomcomplet = nomcomplet;
     }
-
     public String getEmail() {
         return email;
     }
@@ -130,5 +160,54 @@ public class User{
 
     public void setCompte(Compte compte) {
         this.compte = compte;
+    }
+
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
+    }
+
+    public Date getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(Date updated_at) {
+        this.updated_at = updated_at;
+    }
+
+    public String getStatut() {
+        return statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
+    public String getImage_name() {
+        return image_name;
+    }
+
+    public void setImage_name(String image_name) {
+        this.image_name = image_name;
     }
 }
