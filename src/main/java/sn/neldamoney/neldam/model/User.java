@@ -48,6 +48,11 @@ public class User{
     @JsonIgnoreProperties("users")
     private Partenaire partenaire;
 
+    @JoinColumn(name = "compte_id", referencedColumnName = "id")
+    @ManyToOne(optional = false) // ceci est obligatoir
+    @JsonIgnoreProperties("users")
+    private Compte compte;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -117,5 +122,13 @@ public class User{
 
     public void setPartenaire(Partenaire partenaire) {
         this.partenaire = partenaire;
+    }
+
+    public Compte getCompte() {
+        return compte;
+    }
+
+    public void setCompte(Compte compte) {
+        this.compte = compte;
     }
 }

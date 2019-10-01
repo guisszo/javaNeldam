@@ -29,9 +29,17 @@ public class Partenaire {
     @Size(min=5, max = 50)
     private String raisonsociale;
 
+    @NotBlank
+    @Size(min=5, max = 6)
+    private String statut;
+
     @OneToMany(mappedBy = "partenaire")
     @JsonIgnoreProperties("partenaire")//pour pouvoir pointer dans les deux sens
     public List<User> users;
+
+    @OneToMany(mappedBy = "partenaire")
+    @JsonIgnoreProperties("partenaire")
+    public  List<Compte> comptes;
 
     public Partenaire(){}
 
@@ -42,6 +50,22 @@ public class Partenaire {
 
     public int getId() {
         return id;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public List<Compte> getComptes() {
+        return comptes;
+    }
+
+    public void setComptes(List<Compte> comptes) {
+        this.comptes = comptes;
     }
 
     public void setId(int id) {
@@ -72,7 +96,5 @@ public class Partenaire {
         this.statut = statut;
     }
 
-    @NotBlank
-    @Size(min=5, max = 6)
-    private String statut;
+
 }
