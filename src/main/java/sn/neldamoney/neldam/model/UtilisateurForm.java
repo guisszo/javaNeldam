@@ -66,6 +66,7 @@ public class UtilisateurForm {
     private String numcompte;
 
     private  int solde;
+    private Partenaire partenaire;
 
     public int getId() {
         return id;
@@ -73,6 +74,14 @@ public class UtilisateurForm {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Partenaire getPartenaire() {
+        return partenaire;
+    }
+
+    public void setPartenaire(Partenaire partenaire) {
+        this.partenaire = partenaire;
     }
 
     public String getNinea() {

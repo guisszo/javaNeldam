@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -57,10 +56,10 @@ public class User{
     private String image_name;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate created_at;
+    private LocalDateTime created_at;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate updated_at;
+    private LocalDateTime updated_at;
 
         @NotBlank
     @Size(min = 5, max = 6)
@@ -178,7 +177,7 @@ public class User{
         this.adresse = adresse;
     }
 
-    public LocalDate getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
@@ -186,7 +185,7 @@ public class User{
         this.created_at = created_at;
     }
 
-    public LocalDate getUpdated_at() {
+    public LocalDateTime getUpdated_at() {
         return updated_at;
     }
 
