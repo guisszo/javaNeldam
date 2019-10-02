@@ -8,7 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,7 +42,7 @@ public class User{
     private String email;
 
     @NotBlank
-    @Size(min=6, max = 100)
+    @Size(min=4, max = 100)
     private String password;
 
     @NotBlank
@@ -55,17 +56,13 @@ public class User{
     @Size(min = 2, max = 100)
     private String image_name;
 
-    @NotBlank
-    @Size(min = 6, max = 15)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date created_at;
+    private LocalDate created_at;
 
-    @NotBlank
-    @Size(min = 6, max = 15)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date updated_at;
+    private LocalDate updated_at;
 
-    @NotBlank
+        @NotBlank
     @Size(min = 5, max = 6)
     private String statut;
 
@@ -89,12 +86,14 @@ public class User{
 
     public User() {}
 
-    public User(String nomcomplet, String username, String email, String password, String tel, String statut, String image_name) {
+
+    public User(String nomcomplet, String username, String email, String password, String tel, String adresse, String statut, String image_name) {
         this.nomcomplet = nomcomplet;
         this.username = username;
         this.email = email;
         this.password = password;
         this.tel = tel;
+        this.adresse = adresse;
         this.statut = statut;
         this.image_name = image_name;
     }
@@ -179,19 +178,19 @@ public class User{
         this.adresse = adresse;
     }
 
-    public Date getCreated_at() {
+    public LocalDate getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Date created_at) {
+    public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
     }
 
-    public Date getUpdated_at() {
+    public LocalDate getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(Date updated_at) {
+    public void setUpdated_at(LocalDateTime updated_at) {
         this.updated_at = updated_at;
     }
 

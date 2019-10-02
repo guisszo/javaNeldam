@@ -23,7 +23,8 @@ public class Partenaire {
     private int id;
 
     @NotBlank
-    private int ninea;
+    @Size(min=3, max = 50)
+    private String ninea;
 
     @NotBlank
     @Size(min=5, max = 50)
@@ -43,7 +44,7 @@ public class Partenaire {
 
     public Partenaire(){}
 
-    public  Partenaire(int ninea,String raisonsociale){
+    public  Partenaire(String ninea,String raisonsociale){
         this.ninea = ninea;
         this.raisonsociale = raisonsociale;
     }
@@ -72,11 +73,11 @@ public class Partenaire {
         this.id = id;
     }
 
-    public int getNinea() {
+    public String getNinea() {
         return ninea;
     }
 
-    public void setNinea(int ninea) {
+    public void setNinea(String ninea) {
         this.ninea = ninea;
     }
 

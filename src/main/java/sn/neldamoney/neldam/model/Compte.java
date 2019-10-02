@@ -33,8 +33,7 @@ public class Compte {
     private  int solde;
 
     @NotBlank
-    @Size(min = 6, max = 15)
-    @DateTimeFormat(pattern = "yyyy-MM(dd")
+    @Size(min = 5, max = 15)
     private Date created_at;
 
     @JoinColumn(name = "partenaire_id", referencedColumnName = "id")
