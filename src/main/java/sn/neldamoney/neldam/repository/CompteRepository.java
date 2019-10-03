@@ -10,5 +10,7 @@ import java.util.Optional;
 public interface CompteRepository extends JpaRepository<Compte, Long> {
 
     @Override
-    Optional<Compte> findById(Long aLong);
+    Optional<Compte> findById(Long id);
+
+    Optional<Compte> findCompteByNumcompte( String numcompte);
 }

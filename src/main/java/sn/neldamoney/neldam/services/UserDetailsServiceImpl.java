@@ -12,6 +12,7 @@ import sn.neldamoney.neldam.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+    private User userConnecte; // declaration de la variable pour la récupération du user connécté
 
     @Autowired
     UserRepository userRepository;
@@ -22,7 +23,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         User user = userRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("User Not Found with -> username or email : " + username));
-
+        this.userConnecte=user; // on initie l'utilisateur connecté
         return UserPrinciple.build(user);
+    }
+
+    public User getUserConnecte(){
+        return userConnecte;
     }
 }

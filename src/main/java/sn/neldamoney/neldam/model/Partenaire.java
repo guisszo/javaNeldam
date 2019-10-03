@@ -34,11 +34,11 @@ public class Partenaire {
     @Size(min=5, max = 6)
     private String statut;
 
-    @OneToMany(mappedBy = "partenaire")
+    @OneToMany( mappedBy = "partenaire")
     @JsonIgnoreProperties("partenaire")//pour pouvoir pointer dans les deux sens
     public List<User> users;
 
-    @OneToMany(mappedBy = "partenaire")
+    @OneToMany(mappedBy = "partenaire" )
     @JsonIgnoreProperties("partenaire")
     public  List<Compte> comptes;
 

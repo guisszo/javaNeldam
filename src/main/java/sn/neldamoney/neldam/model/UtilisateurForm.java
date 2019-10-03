@@ -66,7 +66,15 @@ public class UtilisateurForm {
     private String numcompte;
 
     private  int solde;
+
     private Partenaire partenaire;
+
+    //Partie Depot
+
+    private  int montant;
+
+    private  int mtn_avant_depot;
+
 
     public int getId() {
         return id;
@@ -202,5 +210,21 @@ public class UtilisateurForm {
 
     public void setSolde(int solde) {
         this.solde = solde;
+    }
+
+    public int getMontant() {
+        return montant;
+    }
+
+    public void setMontant(int montant) {
+        this.montant = montant;
+    }
+
+    public int getMtn_avant_depot() {
+        return mtn_avant_depot;
+    }
+
+    public void setMtn_avant_depot(int mtn_avant_depot) {
+        this.mtn_avant_depot = mtn_avant_depot;
     }
 }

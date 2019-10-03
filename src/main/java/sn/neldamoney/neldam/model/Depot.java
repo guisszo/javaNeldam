@@ -1,12 +1,11 @@
 package sn.neldamoney.neldam.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -17,14 +16,13 @@ public class Depot {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank
+
     private  int montant;
 
-    @NotBlank
+
     private  int mtn_avant_depot;
 
-    @NotBlank
-    private Date created_at;
+    private LocalDateTime created_at;
 
     @JoinColumn(name = "compte_id",referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -36,6 +34,13 @@ public class Depot {
     //@JsonIgnoreProperties("depots")
     private User caissier;
 
+    public  Depot (){}
+
+    public  Depot (int montant, int mtn_avant_depot){
+        this.montant = montant;
+        this.mtn_avant_depot = mtn_avant_depot;
+
+    }
     public int getId() {
         return id;
     }
@@ -60,11 +65,11 @@ public class Depot {
         this.mtn_avant_depot = mtn_avant_depot;
     }
 
-    public Date getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Date created_at) {
+    public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
     }
 
