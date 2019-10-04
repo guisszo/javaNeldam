@@ -51,7 +51,7 @@ public class UtilisateurController {
 
     @PostMapping(value = "/add", consumes = {MediaType.APPLICATION_JSON_VALUE})
     @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN')")
-     public User add(@RequestBody  UtilisateurForm  uform){
+     public Message add(@RequestBody  UtilisateurForm  uform){
 
         /******************** Creation du Partenaire********************************/
 
@@ -87,8 +87,9 @@ public class UtilisateurController {
            u.setCompte(c);// ici on lui passe l'entité Compte pour la récupération de l'id
            u.setPartenaire(p);//on donne l'objet partenaire pour qu'il recupere l'Id
            u.setRoles(roles);
+        userRepository.save(u);
 
-           return userRepository.save(u);
+           return new Message(200,"Partenaire ajouté avec succes");
 
     }
 
@@ -98,7 +99,7 @@ public class UtilisateurController {
 
     @PostMapping(value = "/adduser", consumes = {MediaType.APPLICATION_JSON_VALUE})
     @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_PARTENAIRE','ROLE_PARTENAIRE_ADMIN')")
-    public String addUser(@RequestBody UtilisateurForm uform){
+    public Message addUser(@RequestBody UtilisateurForm uform){
     User thisUser = userDetailsService.getUserConnecte();//On recupère ici l'utilisateur qui est connecté
 
         User u = new User(uform.getNomcomplet(),uform.getUsername(),uform.getEmail(),uform.getPassword(),
@@ -116,14 +117,14 @@ public class UtilisateurController {
         u.setRoles(roles);
         userRepository.save(u);
 
-        return "utilisateur inséré";
+        return new Message(200, "utilisateur inséré");
     }
 
-    /********************************** Insertion d'un depot par le caissier *********************************/
+    /********************************** Insertion d'un depot par le caissier*********************************/
 
     @PostMapping(value = "/depot", consumes = {MediaType.APPLICATION_JSON_VALUE})
     @PreAuthorize("hasAuthority('ROLE_CAISSIER')")
-    public String depot(@RequestBody UtilisateurForm uform) throws Exception {
+    public Message depot(@RequestBody UtilisateurForm uform) throws Exception {
         User caissier = userDetailsService.getUserConnecte();
 
         Depot d = new Depot(uform.getMontant(),uform.getMtn_avant_depot());
@@ -132,7 +133,7 @@ public class UtilisateurController {
                 ()->new Exception("Ce compte n'existe pas !")
         );//recherche du numero de compte saisi
          if (uform.getMontant() < 75000){
-             return "le montant doit etre supérieur ou égal à 75000 F";
+             return new Message(208, "le montant doit etre supérieur ou égal à 75000 F");
 
          }
 
@@ -150,16 +151,16 @@ public class UtilisateurController {
             depotRepository.save(d);
 
 
-        return "Le depot a bien été effectué";
+        return new Message(200, "Le depot a bien été effectué");
     }
 
     /*############################# Fin de l'insertion d'un Depot ###########################*/
 
-    /********************************** Bloquer/Debloquer un utilisateur *********************************/
+    /********************************** Bloquer/Debloquer un utilisateur*********************************/
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN')")
     @PutMapping(value = "/update/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public  String update(@PathVariable(value = "id") int id) throws Exception {
+    public Message update(@PathVariable(value = "id") int id) throws Exception {
 
 
        User util = userRepository.findById((long) id).orElseThrow(
@@ -177,6 +178,6 @@ public class UtilisateurController {
        }
        userRepository.save(util);
 
-       return "Utilisateur mis a jour";
+       return new Message(200,"Utilisateur mis a jour");
     }
 }
